@@ -25,7 +25,7 @@ def create_app():
     login_manager.init_app(app)
     migrate = Migrate(app, db)
 
-    login_manager.login_view = 'main.login'  # Ajustar conforme a rota de login
+    login_manager.login_view = 'main.login' 
 
     # Configuração do Flask-Login
     login_manager.login_view = 'main.login'  # Redireciona para a rota de login

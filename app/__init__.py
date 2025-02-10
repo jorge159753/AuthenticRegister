@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 import os
-from app.model import User
+
 
 # Instanciar objetos globais
 db = SQLAlchemy()
@@ -44,5 +44,8 @@ def create_app():
     # Importar e registrar Blueprints
     from app.routes import main
     app.register_blueprint(main)
+
+    # Importa os modelos (Após a inicializar o db)
+    from app.model import User
 
     return app

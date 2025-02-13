@@ -18,7 +18,7 @@ class Post(db.Model):
     title = db.Column(db.String(150), nullable = False)
     content = db.Column(db.Text, nullable = False)
     data_Created = db.Column(db.DateTime, default = db.func.now()) # Data de criação do Post
-    user_id = db.Column(db.Integer, db.ForeignKey('user_id'), nullable = False) # ID do Autor do post (User)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False) # ID do Autor do post (User)
 
     def __repr__(self):
         return f"<Post {self.title}>"

@@ -4,7 +4,6 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 import os
 
-
 # Instanciar objetos globais
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -15,17 +14,10 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-    @app.route('/')
-    def index():
-        return redirect(url_for('main.home'))  # Certifique-se de que 'main.home' exista
-
     # Inicializar extensões
     db.init_app(app)
     login_manager.init_app(app)
     migrate = Migrate(app, db)
-
-    login_manager.login_view = 'main.login' 
 
     # Configuração do Flask-Login
     login_manager.login_view = 'main.login'  # Redireciona para a rota de login
@@ -45,7 +37,12 @@ def create_app():
     from app.routes import main
     app.register_blueprint(main)
 
-    # Importa os modelos (Após a inicializar o db)
+    # Importar os modelos (Após a inicialização do db)
     from app.model import User
+
+    # Rota inicial para redirecionamento
+    @app.route('/')
+    def index():
+        return redirect(url_for('main.home'))  # Certifique-se de que 'main.home' exista
 
     return app
